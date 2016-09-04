@@ -178,6 +178,7 @@ service iptables save
 ## 参考
 * [Finalspeed备份 by dupontjoy](https://github.com/dupontjoy/customization/tree/master/Rules/Shadowsocks/Finalspeed)
 * [Shadowsocks-go一键安装脚本](https://teddysun.com/392.html)
+* [黑科技，效果逆天！使用FinalSpeed给搬瓦工(Bandwagonhost)加速](https://blog.kuoruan.com/82.html)
 
 
 ## 许可
