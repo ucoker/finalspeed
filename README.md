@@ -1,5 +1,9 @@
 # shadowsocks  & finalspeed 服务端搭建
 
+安装环境：
+
+- ubuntu 14.04
+
 ## 安装Shadowsocks服务端:
 
 如果已经安装shadowsocks，请跳过这步骤。
@@ -14,6 +18,7 @@
 	./shadowsocks-go.sh 2>&1 | tee shadowsocks-go.log
 	~~~
  脚本安装完成后，已将 shadowsocks-go 加入开机自启动
+ 
 
 ### 配置
 * 修改配置文件
@@ -80,6 +85,41 @@ chmod +x install_fs.sh
 ./install_fs.sh 2>&1 | tee install.log
 ```
 
+安装成功后会出现如下提示
+
+```
+Archive:  finalspeed_server.zip
+  inflating: /fs/fs.jar              
+  inflating: /fs/start.sh            
+  inflating: /fs/stop.sh             
+  inflating: /fs/restart.sh          
+FinalSpeed start,log file: /fs/server.log
+
+FinalSpeed server starting... 
+System Name: linux
+Listen udp port: 150
+Listen tcp port: 150
+Network Interface List: 
+     eth0
+  Pseudo-device that captures on all interfaces   any
+     lo
+Selected Network Interface:
+     eth0
+FinalSpeed server start success.
+```
+
+添加开机启动
+
+~~~bash
+nano /etc/rc.local
+~~~
+
+在exit 0 之前 加入 
+  
+~~~bash
+sh /fs/start.sh
+~~~
+
 ###  开放端口
 
 如果没有设置防火墙，此步骤可跳过。
@@ -106,8 +146,36 @@ service iptables save
 * 运行日志：  
 `tail -f /fs/server.log`
 
+### 客户端配置
 
-## 部分参考
+例如：远端shadowsocks端口是8989,本地加速端口是8985,配置应该如下：
+
+先下载并安装  [shadowsocks Mac 客户端](https://github.com/shadowsocks/shadowsocks-iOS/releases)
+
+- 配置`shadowsocks 客户端` 
+
+	新增服务器配置如下：  
+	端口写本地加速端口8985  
+	密码跟加密方式应该填写远端shadowsocks对应的配置。	
+
+	![sadowsocks configuration](img/shadowsocks_configuration.png)
+	
+再下载并安装  [FinalSpeed 客户端](https://github.com/ucoker/finalspeed/tree/master/client)
+
+- 配置`FinalSpeed 客户端` 
+	
+	地址写远端服务器IP，传输协议使用UDP，物理带宽根据自己网络设定。  
+	添加加速端口，如下图：
+	
+	![FinalSpeed configuration](img/FinalSpeed_1.0_Configuration.png)
+
+- 在谷歌浏览器或者可以使用sock5代理的地方设置
+
+	`127.0.0.1 1080`
+
+
+
+## 参考
 * [Finalspeed备份 by dupontjoy](https://github.com/dupontjoy/customization/tree/master/Rules/Shadowsocks/Finalspeed)
 * [Shadowsocks-go一键安装脚本](https://teddysun.com/392.html)
 
