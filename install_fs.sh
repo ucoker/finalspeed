@@ -20,8 +20,13 @@ function checkjava(){
 			yum install -y java-1.8.0-openjdk
 		fi
 		if [[ $OS = "ubuntu" ]]; then
-			echo " Install  ubuntu java ..."
-			apt-get -y install openjdk-6-jre 
+                        echo " Install  ubuntu java ..."
+                        OS_VERSION=$(lsb_release -r -s)
+        		if [[ $OS_VERSION = "16.04" ]]; then
+				apt-get -y install openjdk-8-jre
+			else
+				apt-get -y install openjdk-6-jre
+			fi
 		fi
 		if [[ $OS = "debian" ]]; then
 			echo " Install  debian java ..."
@@ -145,7 +150,7 @@ function install_finalspeed(){
 	unzip -o $package_save_name  -d $install_path
 	
 	sh ${install_path}"restart.sh"
-    tail -f ${install_path}"server.log"
+	tail -f ${install_path}"server.log"
 }
 
 

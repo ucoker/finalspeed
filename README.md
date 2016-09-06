@@ -2,7 +2,9 @@
 
 安装环境：
 
-- ubuntu 14.04
+- ubuntu 14.04, 16.04
+- centos
+- debian
 
 ## 安装Shadowsocks服务端:
 
