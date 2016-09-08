@@ -6,11 +6,27 @@
 - centos
 - debian
 
-## 安装Shadowsocks服务端:
+
+目录
+
+- [Shadowsocks 服务端](#shadowsocks-install-server) 
+     - [安装](#shadowsocks-installation) 
+     - [配置](#shadowsocks-configration)
+     - [管理](#shadowsocks-manager)
+- [FinalSpeed 服务端](#finalspeed-install-server) 
+     - [安装](#finalspeed-installation) 
+     - [开放端口](#finalspeed-iptables)
+     - [客户端配置](#finalspeed-client-configration)
+     - [管理](#finalspeed-manager)
+- [参考](#reference)
+- [许可](#license)
+
+
+## <a name="shadowsocks-install-server"></a>Shadowsocks服务端
 
 如果已经安装shadowsocks，请跳过这步骤。
 
-### 安装
+### <a name="shadowsocks-installation"></a>安装
 
 * 使用root用户登录，按顺序运行以下命令：
 
@@ -20,9 +36,8 @@
 	./shadowsocks-go.sh 2>&1 | tee shadowsocks-go.log
 	~~~
  脚本安装完成后，已将 shadowsocks-go 加入开机自启动
- 
 
-### 配置
+### <a name="shadowsocks-configration"></a>配置
 * 修改配置文件
 
 	~~~bash
@@ -64,7 +79,7 @@
 	   /etc/init.d/shadowsocks restart
 	   ~~~
   
-###  管理
+###  <a name="shadowsocks-manager"></a>管理
 * 启动  
 	`/etc/init.d/shadowsocks start`
 * 停止  
@@ -76,9 +91,9 @@
   
   
 
-## 安装finalspeed:
+## <a name="finalspeed-install-server"></a>FinalSpeed 服务端
 
-### 安装
+### <a name="finalspeed-installation"></a>安装
 
 ```bash
 rm -f install_fs.sh
@@ -122,7 +137,7 @@ nano /etc/rc.local
 sh /fs/start.sh
 ~~~
 
-###  开放端口
+###  <a name="finalspeed-iptables"></a>开放端口
 
 如果没有设置防火墙，此步骤可跳过。
 
@@ -133,7 +148,7 @@ iptables -A OUTPUT -p tcp --sport 你的vps端口号 -j ACCEPT
 service iptables save
 ```
 
-###  管理
+### <a name="finalspeed-manager"></a>管理
 
 * 更新：  
 执行一键安装会自动完成更新。
@@ -148,7 +163,7 @@ service iptables save
 * 运行日志：  
 `tail -f /fs/server.log`
 
-### 客户端配置
+### <a name="finalspeed-client-configration"></a>客户端配置
 
 例如：远端shadowsocks端口是8989,本地加速端口是8985,配置应该如下：
 
@@ -177,12 +192,12 @@ service iptables save
 
 
 
-## 参考
+## <a name="reference"></a>参考
 * [Finalspeed备份 by dupontjoy](https://github.com/dupontjoy/customization/tree/master/Rules/Shadowsocks/Finalspeed)
 * [Shadowsocks-go一键安装脚本](https://teddysun.com/392.html)
 * [黑科技，效果逆天！使用FinalSpeed给搬瓦工(Bandwagonhost)加速](https://blog.kuoruan.com/82.html)
 
 
-## 许可
+## <a name="license"></a>许可
 
 [MIT](http://opensource.org/licenses/MIT) © [UCOKER CHAN](https://github.com/ucoker)
